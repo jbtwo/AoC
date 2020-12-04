@@ -13,27 +13,45 @@ tempArr.forEach(x => {
 })
 
 // set slope
-const slope = { "down": 1, "right": 3 };
+const slopes = [
+    { "down": 1, "right": 1 }, 
+    { "down": 1, "right": 3 }, 
+    { "down": 1, "right": 5 }, 
+    { "down": 1, "right": 7 }, 
+    { "down": 2, "right": 1 }];
 
+// init totals array
+let totals = [];
 
-function countTrees (arr) {
-    // slope counter
+function countTrees(arr,slope) {
+    // initialize slope counter with value
     let count = slope.right;
     // tree counter
     let trees = 0;
-
-    // loop through array, starting at 1
-    for (i = 1; i < arr.length; i++) {
-        // increment tree if # char found
+    
+    // loop through array, starting at slope down
+    for (i = slope.down; i < arr.length; i++) {
         console.log(arr[i].charAt(count))
+        // increment tree if # char found
         if (arr[i].charAt(count) == '#') {
             trees++
         }
-        count= count + slope.right;
+        count += slope.right;
     }
-    console.log(trees)
+    totals.push(trees)
 }
 
+slopes.forEach(x => {
+countTrees(arr,x);
+}) 
 
-countTrees(arr);
+console.log(totals);
+
+let finalTotal = 1;
+
+totals.forEach(x => {
+    finalTotal = finalTotal * x
+})
+// console.log(finalTotal);
+
 
